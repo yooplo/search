@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Google Advanced Search</title>
+        <link rel="stylesheet" href="style/index.css">
+        <!-- Add Star Wars-inspired Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+        <!-- Add an icon library -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    </head>
+    <body class="advanced-search">
+        <!-- Galactic Buttons at the top right -->
+        <div class="button-container">
+            <div class="button">
+                <a class="link" href="index.html">Astromech Search</a>
+            </div>
+            <div class="button">
+                <a class="link" href="imageSearch.html">Jedi Image Search</a>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <h1>Advanced-Sith-Search</h1>
+
+        <!-- Advanced Search Form -->
+        <div id="searchbar">
+            <form action="https://www.google.com/search" method="GET">
+                <div class="form-wrapper">
+                    <!-- Search Query -->
+                    <div class="search-section">
+                        <label for="query">Search for:</label>
+                        <input id="query" type="text" name="q" placeholder="Search...">
+                    </div>
+
+                    <!-- Exact Phrase -->
+                    <div class="search-section">
+                        <label for="exact-phrase">Exact phrase:</label>
+                        <input id="exact-phrase" type="text" name="exact_phrase" placeholder="Exact phrase">
+                    </div>
+
+                    <!-- Exclude Words -->
+                    <div class="search-section">
+                        <label for="exclude-words">Exclude words:</label>
+                        <input id="exclude-words" type="text" name="exclude" placeholder="Words to exclude">
+                    </div>
+
+                    <!-- Site or Domain -->
+                    <div class="search-section">
+                        <label for="site">Site or domain:</label>
+                        <input id="site" type="text" name="site" placeholder="e.g. site:example.com">
+                    </div>
+
+                    <!-- File Type -->
+                    <div class="search-section">
+                        <label for="filetype">File type:</label>
+                        <input id="filetype" type="text" name="filetype" placeholder="e.g. pdf, doc">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submit-button" aria-label="Google Advanced Search">Search</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

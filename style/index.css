@@ -1,0 +1,202 @@
+/* General Body Styling: Galactic Background */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    background: url('../images/hyperspace.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    color: #eb0202;
+}
+
+/* Galactic Top-Right Buttons */
+.button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button {
+    text-align: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffe81f; /* Star Wars yellow */
+    font-size: 16px;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow: 0px 0px 10px #ffe81f;
+}
+
+.button a.link {
+    color: #ffe81f;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.button a.link:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Common Search Bar Styling */
+#searchbar {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 50px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0px 0px 15px #ffe81f; /* Outer glow effect */
+}
+
+#searchbar form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Left Icon Styling */
+#icon-left {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #ffe81f;
+    cursor: pointer;
+    text-shadow: 0px 0px 10px #ffe81f; /* Glow effect */
+}
+
+#icon-left:hover {
+    color: white;
+}
+
+/* Input Field Styling */
+#textbox {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: #ffe81f;
+    font-size: 16px;
+    padding: 10px;
+    outline: none;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Placeholder Text Styling */
+#textbox::placeholder {
+    color: #ffe81f;
+    opacity: 0.8;
+}
+
+/* Right Icons Styling */
+#icon-right {
+    display: flex;
+    gap: 10px;
+    color: #ffe81f;
+}
+
+#icon-right i {
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-shadow: 0px 0px 10px #ffe81f; /* Glow effect */
+}
+
+#icon-right i:hover {
+    color: white;
+}
+
+/* Hidden Submit Button */
+#submit-button {
+    display: none;
+}
+
+/* Image Input Button Styling */
+#textbox[type="file"] {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #ffe81f;
+    padding: 10px;
+    font-size: 16px;
+    width: auto;
+}
+
+/* Button for Image Upload */
+#icon-right i.fa-upload {
+    cursor: pointer;
+}
+
+/* Specific Adjustments for the Advanced Search Page */
+.advanced-search #searchbar {
+    width: 90%; /* Adjust width for advanced search */
+    max-width: 800px; /* Larger max-width */
+    padding: 30px; /* More padding for comfort */
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly dark background */
+    border-radius: 15px; /* Rounded corners for the form */
+    box-shadow: 0px 0px 15px #ffe81f; /* Glow effect for the container */
+    margin-top: 50px; /* Space from top */
+}
+
+/* Advanced Search Form Wrapper */
+.advanced-search .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Advanced Search Sections (Search Options) */
+.advanced-search .search-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border: 2px solid #ffe81f; /* Border for each section */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Adjust input fields inside the sections */
+.advanced-search .search-section input {
+    padding: 12px; /* Larger padding for better accessibility */
+    font-size: 18px; /* Larger font size */
+    border: 2px solid #ffe81f; /* Border for the input fields */
+    border-radius: 8px; /* Rounded corners for input fields */
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background for inputs */
+    color: #ffe81f; /* Text color */
+}
+
+.advanced-search .search-section input::placeholder {
+    color: #ffe81f;
+    opacity: 0.8;
+}
+
+/* Button Adjustments for Advanced Search */
+.advanced-search #submit-button {
+    padding: 14px 30px; /* Larger button for better usability */
+    font-size: 18px;
+    font-family: 'Press Start 2P', cursive;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffe81f;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 10px #ffe81f;
+    cursor: pointer;
+}
+
+.advanced-search #submit-button:hover {
+    background-color: #ffe81f;
+    color: black;
+}
