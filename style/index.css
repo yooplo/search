@@ -142,13 +142,19 @@ h1 {
 
 /* Specific Adjustments for the Advanced Search Page */
 .advanced-search #searchbar {
-    width: 90%; /* Adjust width for advanced search */
-    max-width: 800px; /* Larger max-width */
-    padding: 30px; /* More padding for comfort */
-    background-color: rgba(0, 0, 0, 0.7); /* Slightly dark background */
-    border-radius: 15px; /* Rounded corners for the form */
-    box-shadow: 0px 0px 15px #ffe81f; /* Glow effect for the container */
-    margin-top: 50px; /* Space from top */
+    width: 90%;
+    max-width: 800px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px #ffe81f;
+    margin-top: 50px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 /* Advanced Search Form Wrapper */
@@ -156,26 +162,29 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%;
 }
 
 /* Advanced Search Sections (Search Options) */
 .advanced-search .search-section {
     display: flex;
+    align-self: center;
     flex-direction: column;
     gap: 8px;
     padding: 10px;
-    border: 2px solid #ffe81f; /* Border for each section */
-    border-radius: 8px; /* Rounded corners */
+    border: 2px solid #ffe81f;
+    border-radius: 8px;
+    width: 80%;
 }
 
 /* Adjust input fields inside the sections */
 .advanced-search .search-section input {
-    padding: 12px; /* Larger padding for better accessibility */
-    font-size: 18px; /* Larger font size */
-    border: 2px solid #ffe81f; /* Border for the input fields */
-    border-radius: 8px; /* Rounded corners for input fields */
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background for inputs */
-    color: #ffe81f; /* Text color */
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #ffe81f;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: #ffe81f;
 }
 
 .advanced-search .search-section input::placeholder {
@@ -185,7 +194,7 @@ h1 {
 
 /* Button Adjustments for Advanced Search */
 .advanced-search #submit-button {
-    padding: 14px 30px; /* Larger button for better usability */
+    padding: 14px 30px;
     font-size: 18px;
     font-family: 'Press Start 2P', cursive;
     background-color: rgba(0, 0, 0, 0.8);
