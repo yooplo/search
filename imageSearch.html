@@ -10,9 +10,9 @@
         <!-- Add an icon library -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <!-- Link to the external JavaScript file -->
-        <script src="/scripts/search.js" defer></script>
+        <script src="scripts/imageSearch.js" defer></script> <!-- Ensure the correct path is used -->
     </head>
-    <body>
+    <body class="image-search">
         <!-- Galactic Buttons at the top right -->
         <div class="button-container">
             <div class="button">
@@ -28,21 +28,24 @@
 
         <!-- Galactic Image Search Form -->
         <div id="searchbar">
-            <form id="image-search-form" action="https://images.google.com" method="GET">
-                <!-- Left Icon -->
-                <i id="icon-left" class="fas fa-image"></i>
-                
-                <!-- Image Upload Input -->
-                <input id="textbox" type="file" accept="image/*" name="image_file" required>
-                
-                <!-- Right Icon -->
-                <div id="icon-right">
-                    <i class="fas fa-upload" id="upload-icon"></i>
+            <form id="image-search-form" action="https://lens.google.com/upload" method="POST" enctype="multipart/form-data">
+                <div id="search-by-image" aria-label="Search by image" role="button" tabindex="0">
+                    <svg class="Gdd5U" focusable="false" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                        <rect fill="none" height="192" width="192"></rect>
+                        <g>
+                            <circle fill="#34a853" cx="144.07" cy="144" r="16"></circle>
+                            <circle fill="#4285f4" cx="96.07" cy="104" r="24"></circle>
+                            <path fill="#ea4335" d="M24,135.2c0,18.11,14.69,32.8,32.8,32.8H96v-16l-40.1-0.1c-8.8,0-15.9-8.19-15.9-17.9v-18H24V135.2z"></path>
+                            <path fill="#fbbc04" d="M168,72.8c0-18.11-14.69-32.8-32.8-32.8H116l20,16c8.8,0,16,8.29,16,18v30h16V72.8z"></path>
+                            <path fill="#4285f4" d="M112,24l-32,0L68,40H56.8C38.69,40,24,54.69,24,72.8V92h16V74c0-9.71,7.2-18,16-18h80L112,24z"></path>
+                        </g>
+                    </svg>
+                    <!-- Hidden file input, triggered by clicking on the SVG -->
+                    <input type="file" id="image-input" name="encoded_image" accept="image/*" style="display: none;">
                 </div>
-
-                <!-- Submit Button -->
-                <button type="submit" id="submit-button" aria-label="Google Image Search" disabled>Submit</button>
-            </form>
+                <!-- Hidden submit button -->
+                <button type="submit" id="image-submit-button">Submit</button>
+            </form>            
         </div>
     </body>
 </html>

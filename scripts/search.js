@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const queryInput = document.getElementById('query');
     const microphoneIcon = document.querySelector('#icon-left'); // The microphone icon
     const googleIcon = document.querySelector('.fab.fa-google'); // The Google search icon
-    const uploadIcon = document.getElementById('upload-icon'); // The upload icon for image search
-    const imageInput = document.getElementById('textbox'); // The file input for image search
+    const uploadIcon = document.getElementById('search-by-image'); // The upload icon for image search
+    const imageInput = document.getElementById('image-input'); // The file input for image search
 
     // Monitor input fields to enable submit button for text search
     form.addEventListener('input', function () {
@@ -43,12 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Listen for click on the upload icon to submit the image search form
+    // Listen for click on the upload icon to trigger the image input field
     uploadIcon.addEventListener('click', function () {
+        imageInput.click(); // Trigger the file input click when the icon is clicked
+    });
+
+    // Trigger the form submission once an image is selected
+    imageInput.addEventListener('change', function () {
         if (imageInput.files.length > 0) {
             form.submit(); // Submit the form if an image file is selected
         } else {
-            alert('Please select an image file before submitting.');
+            alert('Please select an image to search.');
         }
     });
 
