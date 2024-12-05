@@ -1,6 +1,6 @@
 # Star-Wars-Themed-Google-Search
 
-Welcome to the **Search** project, an immersive Star Wars-inspired search engine that provides multiple search functionalities in one place. Whether you're searching for images, doing advanced Google queries, or uploading images for a reverse search, this project has it all. Featuring different search modes like **Astromech Search**, **Jedi Image Search**, and **Advanced Sith Search**, the site offers a unique user experience, styled in a Star Wars theme.
+Welcome to the **Search** project, an immersive Star Wars-inspired Google theme that provides multiple search functionalities in one place. Whether you're searching for images, doing advanced Google queries, or uploading images for a reverse search, this project has it all. Featuring different search modes like **Astromech Search**, **Jedi Image Search**, and **Advanced Sith Search**, the site offers a unique user experience, styled in a Star Wars theme.
 
 You can click [here](https://yooplo.github.io/search/) to check out how the webpage looks like for yourself and immerse yourself in a galaxy far far away.
 
