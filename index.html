@@ -26,24 +26,31 @@
         <!-- Title -->
         <h1>Astromech-Search</h1>
 
-        <!-- Galactic Search Bar -->
         <div id="searchbar">
             <form id="search-form" action="https://www.google.com/search" method="GET">
-                <!-- Left Icon -->
-                <i id="icon-left" class="fas fa-jedi"></i>
-                
-                <!-- Input Field -->
-                <input id="textbox" type="text" name="q" placeholder="Search the Galaxy" required>
-
-                <!-- Right Icons -->
-                <div id="icon-right">
-                    <i class="fas fa-microphone" id="microphone-icon"></i> <!-- Click this for voice search -->
-                    <i class="fab fa-google" id="google-icon"></i> <!-- Icon for Google Search -->
+                <!-- Search Bar Wrapper -->
+                <div id="search-bar-container">
+                    <!-- Left Icon -->
+                    <i id="icon-left" class="fas fa-jedi"></i>
+                    
+                    <!-- Input Field -->
+                    <input id="textbox" type="text" name="q" placeholder="Search the Galaxy" required>
+        
+                    <!-- Right Icons -->
+                    <div id="icon-right">
+                        <i class="fas fa-microphone" id="microphone-icon"></i>
+                        <i class="fab fa-google" id="google-icon"></i>
+                    </div>
                 </div>
-                
-                <!-- Hidden Submit Button -->
+        
+                <!-- Hidden Default Submit Button -->
                 <button type="submit" id="submit-button" aria-label="Search"></button>
+                
+                <!-- Lucky Button -->
+                <button type="button" id="lucky-button" name="btnI" value="I'm Feeling Lucky" aria-label="I'm Feeling Lucky" onclick="window.location.href='https://www.google.com/search?q='+document.getElementById('textbox').value+'&btnI=I%27m+Feeling+Lucky'">
+                    Let the Force Guide Me!
+                </button>
             </form>
-        </div>
+        </div>              
     </body>
 </html>
