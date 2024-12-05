@@ -2,12 +2,15 @@
 
 Welcome to the **Search** project, an immersive Star Wars-inspired search engine that provides multiple search functionalities in one place. Whether you're searching for images, doing advanced Google queries, or uploading images for a reverse search, this project has it all. Featuring different search modes like **Astromech Search**, **Jedi Image Search**, and **Advanced Sith Search**, the site offers a unique user experience, styled in a Star Wars theme.
 
+You can click [here](https://yooplo.github.io/search/) to check out how the webpage looks like for yourself and immerse yourself in a galaxy far far away.
+
 ## Features
 
 - **Astromech Search**: A simple text-based search bar to search the galaxy via Google.
 - **Jedi Image Search**: A feature that allows users to search by image by uploading an image for a reverse search.
 - **Advanced Sith Search**: A Google-powered advanced search form with options to search for exact phrases, exclude words, or search with all or any of the specified words.
 - **Responsive Design**: A fully responsive layout that works on mobile, tablet, and desktop devices.
+- **Let the force Guide me**: This is the equivalent of the *"I'm feeling lucky"* button on Google's main search page, taking users directly to the first Google search result for the query, bypassing the normal results page.
 - **Voice Search**: Enabled microphone icon for hands-free search (still a work in progress).
 
 ## Technologies Used
