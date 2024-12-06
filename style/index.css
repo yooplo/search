@@ -101,6 +101,7 @@ h1 {
     padding: 10px 20px;
     width: 100%;
     max-width: 600px;
+    height: fit-content;
     box-shadow: var(--glow-effect);
 }
 
@@ -133,12 +134,19 @@ h1 {
     padding: 10px;
     outline: none;
     font-family: var(--font-main);
+    overflow-wrap: break-word;
+    white-space: pre-wrap; 
 }
 
 #textbox::placeholder {
     color: var(--primary-color);
     opacity: 0.8;
+    font-size: 16px;
+    line-height: 1.2; 
+    white-space: normal; 
+    text-align: start;
 }
+
 
 /* Right Icons Styling */
 #icon-right {
@@ -146,6 +154,19 @@ h1 {
     gap: 10px;
     color: var(--primary-color);
 }
+
+#image-submit-button {
+    display: flex;
+    color: red;
+    background-color: rgb(53, 50, 50);
+    font-family: var(--font-main);
+}
+
+#image-submit-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
 
 #icon-right i {
     font-size: 20px;
@@ -158,108 +179,11 @@ h1 {
     color: white;
 }
 
-#search-by-image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--background-color);
-    box-shadow: var(--glow-effect);
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#search-by-image:hover {
-    background-color: var(--primary-color);
-    transform: scale(1.1);
-}
-
-#search-by-image svg {
-    width: 32px;
-    height: 32px;
-    fill: var(--primary-color);
-    transition: fill 0.3s ease;
-}
-
-#search-by-image:hover svg {
-    fill: black;
-}
-
-#image-input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    overflow: hidden;
-    z-index: -1;
-}
-
 /* Hidden Submit Button */
 #submit-button {
     display: none;
 }
 
-#image-submit-button {
-    display: flex;
-    justify-content: center;
-    padding: 12px 25px;
-    font-size: 10px;
-    font-family: 'Press Start 2P', cursive;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #ffe81f;
-    border-radius: 12px;
-    border: 2px solid #ffe81f;
-    box-shadow: 0px 0px 10px #ffe81f;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: fit-content;
-    text-align: center;
-    font-weight: bold;
-}
-
-.image-search #searchbar {
-    box-shadow: none;
-    width: 15%;
-}
-
-#image-search-form {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-/* Glowing effect and hover interaction */
-#image-submit-button:hover {
-    background-color: #ffe81f;
-    color: black;
-    transform: scale(1.05);
-}
-
-/* Focused button styling for accessibility */
-#image-submit-button:focus {
-    outline: none;
-    box-shadow: 0px 0px 10px #ff6a00, 0px 0px 30px #ffe81f;
-}
-
-/* Image Input Button Styling */
-#textbox[type="file"] {
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    color: #ffe81f;
-    padding: 10px;
-    font-size: 16px;
-    width: auto;
-}
-
-/* Button for Image Upload */
-#icon-right i.fa-upload {
-    cursor: pointer;
-}
-
-/* Advanced Search Container Styling */
 .advanced-search {
     display: flex;
     flex-direction: column;
@@ -278,8 +202,8 @@ h1 {
     padding: 10px;
     border: 2px solid var(--primary-color);
     border-radius: var(--button-radius);
-    width: 100%; /* Controls the width of each search section */
-    max-width: 600px; /* Set a maximum width for larger screens */
+    width: 100%;
+    max-width: 600px;
     background-color: var(--background-color);
 }
 
@@ -359,6 +283,10 @@ h1 {
     #search-bar-container {
         padding: 10px 15px;
         width: 95%;
+    }
+
+    #textbox::placeholder {
+        font-size: 12px;
     }
 
     .advanced-search .search-section {
