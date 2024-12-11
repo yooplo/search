@@ -1,61 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Advanced Sith Search</title>
-        <link rel="stylesheet" href="style/index.css">
-        <!-- Add Star Wars-inspired Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
-        <!-- Add an icon library -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    </head>
-    <body class="advanced-search">
-        <!-- Buttons at the top right -->
-        <div class="button-container">
-            <div class="button">
-                <a class="link" href="index.html">Astromech Search</a>
-            </div>
-            <div class="button">
-                <a class="link" href="imageSearch.html">Jedi Image Search</a>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Sith Search</title>
+    <link rel="stylesheet" href="style/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="advanced-search">
+    <div class="button-container">
+        <div class="button">
+            <a class="link" href="index.html">Astromech Search</a>
         </div>
+        <div class="button">
+            <a class="link" href="imageSearch.html">Jedi Image Search</a>
+        </div>
+    </div>
 
-        <!-- Title -->
-        <h1>Advanced-Sith-Search</h1>
+    <h1>Advanced Sith Search</h1>
 
-        <!-- Advanced Search Form -->
-        <div id="searchbar">
-            <form action="https://www.google.com/search" method="GET">
-                <div class="form-wrapper">
-                    <!-- All These Words -->
-                    <div class="search-section">
-                        <label for="all-words">Find pages with… <strong>all these words:</strong></label>
-                        <input id="all-words" type="text" name="q" placeholder="Enter all these words">
-                    </div>
-
-                    <!-- Exact Phrase -->
-                    <div class="search-section">
-                        <label for="exact-phrase">Find pages with… <strong>this exact word or phrase:</strong></label>
-                        <input id="exact-phrase" type="text" name="as_epq" placeholder="Enter exact phrase">
-                    </div>
-
-                    <!-- Any of These Words -->
-                    <div class="search-section">
-                        <label for="any-words">Find pages with… <strong>any of these words:</strong></label>
-                        <input id="any-words" type="text" name="as_oq" placeholder="Enter any of these words">
-                    </div>
-
-                    <!-- None of These Words -->
-                    <div class="search-section">
-                        <label for="none-words">Find pages with… <strong>none of these words:</strong></label>
-                        <input id="none-words" type="text" name="as_eq" placeholder="Enter words to exclude">
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" id="submit-button" aria-label="Google Advanced Search">Search</button>
+    <div id="searchbar">
+        <form action="https://www.google.com/search" method="GET">
+            <div class="form-wrapper">
+                <div class="search-section">
+                    <label for="all-words">Find pages with… <strong>all these words:</strong></label>
+                    <input id="all-words" type="text" name="q" placeholder="Enter all these words">
                 </div>
-            </form>
-        </div>
-    </body>
+                <div class="search-section">
+                    <label for="exact-phrase">Find pages with… <strong>this exact word or phrase:</strong></label>
+                    <input id="exact-phrase" type="text" name="as_epq" placeholder="Enter exact phrase">
+                </div>
+                <div class="search-section">
+                    <label for="any-words">Find pages with… <strong>any of these words:</strong></label>
+                    <input id="any-words" type="text" name="as_oq" placeholder="Enter any of these words">
+                </div>
+                <div class="search-section">
+                    <label for="none-words">Find pages with… <strong>none of these words:</strong></label>
+                    <input id="none-words" type="text" name="as_eq" placeholder="Enter words to exclude">
+                </div>
+                <button type="submit" id="submit-button" aria-label="Google Advanced Search">Advanced Search</button>
+            </div>
+        </form>
+    </div>
+</body>
 </html>

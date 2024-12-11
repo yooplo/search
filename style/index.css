@@ -1,16 +1,14 @@
-/* CSS Variables for Customization */
 :root {
-    --primary-color: #ffe81f;
-    --secondary-color: #eb0202;
-    --background-color: rgba(0, 0, 0, 0.8);
-    --text-color: white;
-    --button-radius: 10px;
-    --font-main: 'Orbitron', sans-serif;
-    --font-alt: 'Press Start 2P', cursive;
-    --glow-effect: 0px 0px 10px var(--primary-color);
+    --primary-color: #1a73e8; /* Google-like blue */
+    --secondary-color: #eb0202; /* Red */
+    --background-color: rgba(255, 255, 255, 0.9); /* Background Color */
+    --text-color: black; /* Text Color */
+    --button-radius: 5px; /* Button border radius */
+    --font-main: 'Orbitron', sans-serif; /* Main font */
+    --font-alt: 'Press Start 2P', cursive; /* Alternative font */
 }
 
-/* General Body Styling: Galactic Background */
+/* General Body Styling */
 body {
     display: flex;
     flex-direction: column;
@@ -18,22 +16,20 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: 'Orbitron', sans-serif;
-    background: url('../images/hyperspace.png') no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    position: relative;
-    overflow: hidden;
+    font-family: var(--font-main);
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
+/* Title */
 h1 {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     font-size: 2rem;
     text-align: center;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 
-/* Galactic Top-Right Buttons */
+/* Top-Right Buttons */
 .button-container {
     position: absolute;
     top: 20px;
@@ -52,190 +48,63 @@ h1 {
     color: var(--primary-color);
     font-size: 14px;
     font-family: var(--font-alt);
-    box-shadow: var(--glow-effect);
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .button a.link {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease;
 }
 
 .button a.link:hover {
-    color: white;
-    text-decoration: underline;
-    transform: scale(1.05);
-}
-
-
-
-#lucky-button {
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    border-radius: 50px;
-    font-family: var(--font-main);
-    padding: 10px 20px;
-    max-width: 300px;
-    box-shadow: var(--glow-effect);
-    text-transform: uppercase;
-    font-size: 14px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-#lucky-button:hover {
-    background-color: var(--primary-color);
-    color: black;
-    transform: scale(1.05);
+    color: var(--secondary-color);
 }
 
 /* Search Bar Styling */
-#search-bar-container {
-    display: flex;
-    align-items: center;
-    background-color: var(--background-color);
-    border-radius: 50px;
-    padding: 10px 20px;
-    width: 100%;
-    max-width: 600px;
-    height: fit-content;
-    box-shadow: var(--glow-effect);
-}
-
-#search-form {
+#searchbar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    width: 100%;
+    max-width: 600px;
 }
 
-#icon-left {
-    font-size: 20px;
-    margin-right: 10px;
-    color: var(--primary-color);
-    cursor: pointer;
-    text-shadow: var(--glow-effect);
-    transition: color 0.3s ease;
+.form-wrapper {
+    width: 100%;
 }
 
-#icon-left:hover {
-    color: var(--text-color);
+.search-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
-#textbox {
-    flex: 1;
-    background-color: transparent;
-    border: none;
-    color: var(--primary-color);
-    font-size: 16px;
+.search-section label {
+    margin-bottom: 5px;
+}
+
+.search-section input {
     padding: 10px;
+    font-size: 16px;
+    border: 2px solid var(--primary-color);
+    border-radius: var(--button-radius);
     outline: none;
-    font-family: var(--font-main);
-    overflow-wrap: break-word;
-    white-space: pre-wrap; 
 }
 
-#textbox::placeholder {
-    color: var(--primary-color);
-    opacity: 0.8;
-    font-size: 16px;
-    line-height: 1.2; 
-    white-space: normal; 
-    text-align: start;
-}
-
-
-/* Right Icons Styling */
-#icon-right {
-    display: flex;
-    gap: 10px;
-    color: var(--primary-color);
-}
-
-#image-submit-button {
-    display: flex;
-    color: red;
-    background-color: rgb(53, 50, 50);
-    font-family: var(--font-main);
-}
-
-#image-submit-button:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-}
-
-
-#icon-right i {
-    font-size: 20px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    text-shadow: var(--glow-effect);
-}
-
-#icon-right i:hover {
-    color: white;
-}
-
-/* Hidden Submit Button */
+/* Submit Button Styling */
 #submit-button {
-    display: none;
-}
-
-.advanced-search {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    padding: 20px;
-}
-
-/* Advanced Search Sections */
-.advanced-search .search-section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-    border: 2px solid var(--primary-color);
-    border-radius: var(--button-radius);
-    width: 100%;
-    max-width: 600px;
-    background-color: var(--background-color);
-}
-
-/* Make the input fields in search sections take full width of the section */
-.advanced-search .search-section input {
-    width: 90%;
-    padding: 12px;
-    font-size: 18px;
-    border: 2px solid var(--primary-color);
-    border-radius: var(--button-radius);
-    background-color: var(--background-color);
-    color: var(--primary-color);
-}
-
-/* Advanced Search Button */
-.advanced-search #submit-button {
-    padding: 14px 30px;
-    font-size: 18px;
-    font-family: var(--font-alt);
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    border-radius: var(--button-radius);
-    border: none;
-    box-shadow: var(--glow-effect);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 20px;
-}
-
-.advanced-search #submit-button:hover {
     background-color: var(--primary-color);
-    color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--button-radius);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit-button:hover {
+    background-color: #0c5db2; /* Darker shade of blue */
 }
 
 /* Responsive Styles */
@@ -249,17 +118,12 @@ h1 {
         padding: 8px 16px;
     }
 
-    #search-bar-container {
-        width: 95%;
-    }
-
-    .advanced-search .search-section {
+    #searchbar {
         width: 90%;
     }
 
-    .advanced-search #submit-button {
+    .search-section input {
         font-size: 14px;
-        padding: 10px 16px;
     }
 }
 
@@ -280,22 +144,12 @@ h1 {
         padding: 5px 10px;
     }
 
-    #search-bar-container {
-        padding: 10px 15px;
+    #searchbar {
+        padding: 10px;
         width: 95%;
     }
 
-    #textbox::placeholder {
+    .search-section input {
         font-size: 12px;
-    }
-
-    .advanced-search .search-section {
-        padding: 8px;
-        gap: 5px;
-    }
-
-    .advanced-search #submit-button {
-        font-size: 12px;
-        padding: 8px 12px;
     }
 }

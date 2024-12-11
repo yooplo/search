@@ -1,44 +1,30 @@
-<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Jedi Image Search</title>
-        <link rel="stylesheet" href="style/index.css">
-        <!-- Add Star Wars-inspired Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
-        <!-- Add an icon library -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    </head>
-    <body class="text-search">
-        <!-- Galactic Buttons at the top right -->
-        <div class="button-container">
-            <div class="button">
-                <a class="link" href="index.html">Astromech Search</a>
-            </div>
-            <div class="button">
-                <a class="link" href="advancedSearch.html">Advanced Sith Search</a>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jedi Image Search</title>
+    <link rel="stylesheet" href="style/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="text-search">
+    <div class="button-container">
+        <div class="button">
+            <a class="link" href="index.html">Astromech Search</a>
         </div>
-
-        <!-- Title -->
-        <h1>Jedi-Image-Search</h1>
-
-        <!-- Galactic Image Search Form -->
-        <div id="searchbar">
-            <!-- Text-based search form -->
-            <form id="search-form" action="https://www.google.com/search" method="GET">
-                <div id="search-bar-container">                    
-                    <!-- Input Field -->
-                    <input type="text" id="textbox" name="q" placeholder="Type your search query here..." required />
-                    <!-- Add the tbm=image parameter to focus the search on images -->
-                    <input type="hidden" name="tbm" value="isch" />
-                    <!-- Search Button -->
-                    <button type="submit" id="image-submit-button">
-                        <i class="fas fa-search"></i> Search
-                    </button>
-                </div>
-            </form>
+        <div class="button">
+            <a class="link" href="advancedSearch.html">Advanced Sith Search</a>
         </div>
-    </body>
+    </div>
+
+    <h1>Jedi Image Search</h1>
+
+    <div id="searchbar">
+        <form id="search-form" action="https://www.google.com/search" method="GET">
+            <input type="text" id="textbox" name="q" placeholder="Type your search query here..." required />
+            <input type="hidden" name="tbm" value="isch" />
+            <button type="submit" id="image-submit-button">Search</button>
+        </form>
+    </div>
+</body>
 </html>
