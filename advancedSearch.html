@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Sith Search</title>
+    <title>Google Advanced Search</title>
     <link rel="stylesheet" href="style/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body class="advanced-search">
     <div class="button-container">
         <div class="button">
-            <a class="link" href="index.html">Astromech Search</a>
+            <a class="link" href="index.html">Google Search</a>
         </div>
         <div class="button">
-            <a class="link" href="imageSearch.html">Jedi Image Search</a>
+            <a class="link" href="imageSearch.html">Google Image Search</a>
         </div>
     </div>
 
-    <h1>Advanced Sith Search</h1>
+    <h1>Google Advanced Search</h1>
 
     <div id="searchbar">
-        <form action="https://www.google.com/search" method="GET">
+        <form action="https://www.google.com/search" method="GET" id="advanced-search-form">
             <div class="form-wrapper">
                 <div class="search-section">
                     <label for="all-words">Find pages with… <strong>all these words:</strong></label>
@@ -39,8 +39,8 @@
                     <label for="none-words">Find pages with… <strong>none of these words:</strong></label>
                     <input id="none-words" type="text" name="as_eq" placeholder="Enter words to exclude">
                 </div>
-                <button type="submit" id="submit-button" aria-label="Google Advanced Search">Advanced Search</button>
             </div>
+            <button type="submit" id="submit-button" aria-label="Google Advanced Search">Advanced Search</button>
         </form>
     </div>
 </body>
