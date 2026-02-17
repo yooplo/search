@@ -1,56 +1,666 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Astromech Search</title>
-        <link rel="stylesheet" href="style/index.css">
-        <!-- Add an icon library -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-        <!-- Add Star Wars-inspired Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500&display=swap" rel="stylesheet">
-        <!-- Include search.js script -->
-        <script src="scripts/search.js" defer></script>
-    </head>
-    <body>
-        <!-- Galactic Buttons at the top right -->
-        <div class="button-container">
-            <div class="button">
-                <a class="link" href="imageSearch.html">Jedi Image Search</a>
-            </div>
-            <div class="button">
-                <a class="link" href="advancedSearch.html">Advanced Sith Search</a>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>For my Gumball 💚</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #4ade80;
+      --soft-green: #bbf7d0;
+      --bg: #0d1117;
+      --card: #131a24;
+      --card2: #1a2235;
+      --pink: #fda4af;
+      --deep-pink: #fb7185;
+      --lilac: #c4b5fd;
+      --gold: #fcd34d;
+      --text: #e8f4f8;
+      --muted: rgba(232,244,248,0.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100dvh;
+      background: var(--bg);
+      font-family: 'Nunito', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 16px;
+    }
+
+    /* ── Background nebula ── */
+    .nebula {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 30%, rgba(74,222,128,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 70%, rgba(253,164,175,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(196,181,253,0.05) 0%, transparent 70%);
+    }
+
+    /* ── Stars ── */
+    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .star {
+      position: absolute; background: white; border-radius: 50%;
+      animation: twinkle var(--d) infinite ease-in-out; opacity: 0;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity:0; transform:scale(0.5); }
+      50%      { opacity:1; transform:scale(1); }
+    }
+
+    /* ── Floating petals / emojis ── */
+    .floaty {
+      position: fixed; pointer-events: none; z-index: 0;
+      animation: floatUp var(--dur) ease-in forwards;
+      font-size: var(--fs); opacity: 0.65;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0.65; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── Page / screen system ── */
+    .screen {
+      position: relative; z-index: 1; width: 100%; max-width: 380px;
+      display: none; flex-direction: column; align-items: center;
+      animation: fadeSlide 0.55s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .screen.active { display: flex; }
+    @keyframes fadeSlide {
+      from { opacity:0; transform:translateY(30px) scale(0.95); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+
+    /* ══════════════════════════════════
+       SCREEN 1 — nickname carousel
+    ══════════════════════════════════ */
+    #s1 { gap: 22px; }
+
+    .nickname-badge {
+      background: linear-gradient(135deg, rgba(74,222,128,0.15), rgba(196,181,253,0.1));
+      border: 1px solid rgba(74,222,128,0.3);
+      border-radius: 50px;
+      padding: 6px 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--soft-green);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: badgePop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+    }
+    @keyframes badgePop {
+      from { opacity:0; transform:scale(0.5); }
+      to   { opacity:1; transform:scale(1); }
+    }
+
+    /* Name cycling */
+    .name-display {
+      text-align: center;
+      min-height: 80px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .name-label {
+      font-size: 0.7rem; font-weight: 800; color: var(--muted);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .name-cycle {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #4ade80, #fda4af, #c4b5fd);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: namePop 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      line-height: 1.1;
+    }
+    @keyframes namePop {
+      0%   { transform: scale(0.6) rotate(-5deg); opacity:0; }
+      100% { transform: scale(1) rotate(0deg); opacity:1; }
+    }
+
+    /* Grogu */
+    .grogu-wrap {
+      width: 150px; height: 150px; cursor: pointer;
+      animation: groguFloat 3.5s ease-in-out infinite;
+    }
+    .grogu-wrap svg { width:100%; height:100%;
+      filter: drop-shadow(0 8px 20px rgba(74,222,128,0.25)); }
+    @keyframes groguFloat {
+      0%,100% { transform:translateY(0) rotate(-2deg); }
+      50%      { transform:translateY(-10px) rotate(2deg); }
+    }
+    .grogu-wrap:active { animation: groguJump 0.4s ease; }
+    @keyframes groguJump {
+      0%,100% { transform:scale(1); }
+      40%     { transform:scale(1.15) translateY(-8px); }
+    }
+
+    .tagline {
+      font-size: 1.05rem; font-weight: 700; color: var(--text);
+      text-align: center; line-height: 1.5; max-width: 280px;
+    }
+    .tagline span { color: var(--green); }
+
+    /* ══════════════════════════════════
+       SCREEN 2 — the question
+    ══════════════════════════════════ */
+    #s2 { gap: 20px; }
+
+    .card {
+      background: var(--card);
+      border-radius: 28px; padding: 24px 20px 28px;
+      width: 100%;
+      border: 1px solid rgba(74,222,128,0.15);
+      box-shadow: 0 0 50px rgba(74,222,128,0.08), 0 20px 50px rgba(0,0,0,0.5);
+      display: flex; flex-direction: column; align-items: center; gap: 18px;
+    }
+
+    .q-grogu { width:130px; height:130px; animation: groguFloat 3.5s ease-in-out infinite; }
+    .q-grogu svg { width:100%; height:100%;
+      filter: drop-shadow(0 6px 16px rgba(253,164,175,0.3)); }
+
+    .q-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.55rem;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.35;
+    }
+    .q-text .name-pop {
+      background: linear-gradient(135deg, #fda4af, #fb7185);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .q-sub { font-size: 0.82rem; color: var(--muted); text-align: center; font-weight: 700; }
+
+    .btns { display:flex; flex-direction:column; align-items:center; gap:10px; width:100%; }
+
+    .btn-yes {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      color: #052e16;
+      border: none; border-radius: 50px;
+      padding: 0.8em 2em;
+      cursor: pointer; width: 100%;
+      box-shadow: 0 4px 24px rgba(74,222,128,0.4);
+      transition: transform 0.15s, box-shadow 0.15s, font-size 0.4s cubic-bezier(0.34,1.56,0.64,1), padding 0.4s;
+      position: relative; overflow: hidden;
+    }
+    .btn-yes::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent);
+      border-radius:inherit; pointer-events:none;
+    }
+    .btn-yes:hover { transform:scale(1.04); box-shadow:0 6px 32px rgba(74,222,128,0.6); }
+    .btn-yes:active { transform:scale(0.96); }
+
+    .no-msg {
+      font-size: 0.78rem; color: var(--pink); text-align: center;
+      font-weight: 800; letter-spacing: 0.3px;
+      min-height: 1.2em;
+      opacity: 0; transform:translateY(4px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .no-msg.vis { opacity:1; transform:translateY(0); }
+
+    .btn-no {
+      font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800;
+      background: transparent; color: rgba(232,244,248,0.3);
+      border: 1.5px solid rgba(232,244,248,0.1);
+      border-radius: 50px; padding: 0.5em 1.5em;
+      cursor: pointer; transition: all 0.3s;
+      width: 55%;
+    }
+    .btn-no:hover { color:rgba(232,244,248,0.5); border-color:rgba(232,244,248,0.2); }
+
+    /* ══════════════════════════════════
+       SCREEN 3 — date reveal
+    ══════════════════════════════════ */
+    #s3 { gap: 0; }
+
+    .reveal-card {
+      background: var(--card);
+      border-radius: 28px; overflow: hidden; width: 100%;
+      border: 1px solid rgba(253,164,175,0.2);
+      box-shadow: 0 0 60px rgba(253,164,175,0.1), 0 24px 60px rgba(0,0,0,0.6);
+    }
+
+    .reveal-top {
+      background: linear-gradient(135deg, #1a2235, #1e1428);
+      padding: 24px 20px 20px;
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      position:relative; overflow:hidden;
+    }
+    .reveal-top::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(253,164,175,0.12) 0%, transparent 70%);
+    }
+
+    .yes-grogu { width:140px; height:140px; position:relative; z-index:1;
+      animation: yesGrogu 1s ease-in-out infinite; }
+    .yes-grogu svg { width:100%; height:100%;
+      filter: drop-shadow(0 10px 28px rgba(253,164,175,0.4)); }
+    @keyframes yesGrogu {
+      0%,100% { transform:rotate(-5deg) scale(1); }
+      25%     { transform:rotate(6deg) scale(1.06); }
+      50%     { transform:rotate(-3deg) scale(1); }
+      75%     { transform:rotate(5deg) scale(1.04); }
+    }
+
+    .yes-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.6rem; color: var(--pink);
+      text-align: center; line-height: 1.25; position:relative; z-index:1;
+      text-shadow: 0 0 30px rgba(253,164,175,0.4);
+    }
+    .heart-row { font-size:1.3rem; animation:heartPulse 1.1s ease-in-out infinite; position:relative; z-index:1; }
+    @keyframes heartPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.18);} }
+
+    /* Date details */
+    .date-body { padding: 20px; display:flex; flex-direction:column; gap:14px; }
+
+    .date-header {
+      font-size:0.68rem; font-weight:800; letter-spacing:2.5px; text-transform:uppercase;
+      color: var(--muted); text-align:center;
+    }
+
+    .venue-name {
+      font-family: 'Pacifico', cursive;
+      font-size:1.3rem;
+      background: linear-gradient(135deg, #fcd34d, #fb923c);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      text-align:center; line-height:1.3;
+    }
+
+    .venue-tag {
+      display:flex; align-items:center; justify-content:center;
+      gap:6px; font-size:0.75rem; font-weight:700; color: var(--lilac);
+    }
+    .venue-tag .dot { width:5px; height:5px; background:var(--lilac); border-radius:50%; }
+
+    .scent-pills {
+      display:flex; flex-wrap:wrap; gap:7px; justify-content:center;
+    }
+    .pill {
+      background: rgba(196,181,253,0.12); border:1px solid rgba(196,181,253,0.25);
+      border-radius:50px; padding:5px 12px;
+      font-size:0.72rem; font-weight:700; color:var(--lilac); white-space:nowrap;
+    }
+
+    .divider { height:1px; background:rgba(232,244,248,0.07); width:100%; }
+
+    .date-perks { display:flex; flex-direction:column; gap:10px; }
+
+    .perk {
+      display:flex; align-items:flex-start; gap:10px;
+    }
+    .perk-icon {
+      font-size:1.1rem; flex-shrink:0; margin-top:1px;
+    }
+    .perk-text { font-size:0.82rem; font-weight:700; color: var(--text); line-height:1.4; }
+    .perk-text small { display:block; font-size:0.72rem; font-weight:600; color:var(--muted); }
+
+    .location-pill {
+      display:flex; align-items:center; justify-content:center; gap:7px;
+      background: linear-gradient(135deg, rgba(252,211,77,0.12), rgba(251,146,60,0.08));
+      border:1px solid rgba(252,211,77,0.2);
+      border-radius:50px; padding:8px 16px;
+      font-size:0.8rem; font-weight:800; color: var(--gold);
+    }
+
+    .close-note {
+      font-size:0.75rem; font-weight:700; color:var(--muted);
+      text-align:center; padding: 0 20px 16px;
+    }
+    .close-note span { color: var(--pink); }
+
+    /* ── Confetti ── */
+    .confetti-piece {
+      position:fixed; pointer-events:none; z-index:200;
+      animation: confettiFall var(--cd) var(--cd-delay) ease-in forwards;
+      transform-origin:center;
+    }
+    @keyframes confettiFall {
+      0%   { transform:translateY(-20px) rotate(0deg); opacity:1; }
+      100% { transform:translateY(110vh) rotate(720deg); opacity:0; }
+    }
+
+    /* ── Tap hint ── */
+    .tap-hint {
+      font-size:0.7rem; color:var(--muted); font-weight:700; letter-spacing:1px;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+  </style>
+</head>
+<body>
+
+<div class="nebula"></div>
+<div class="stars" id="stars"></div>
+
+<!-- ══════════ SCREEN 1: Intro ══════════ -->
+<div class="screen active" id="s1">
+  <div class="nickname-badge">✨ a message for you ✨</div>
+
+  <div class="name-display">
+    <div class="name-label">Hey there,</div>
+    <div class="name-cycle" id="nameCycle">Gumball</div>
+  </div>
+
+  <div class="grogu-wrap" id="groguS1" onclick="groguTap()">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="35" cy="90" rx="28" ry="42" fill="#2d4a2d"/>
+      <ellipse cx="35" cy="90" rx="18" ry="30" fill="#4a7a4a"/>
+      <ellipse cx="165" cy="90" rx="28" ry="42" fill="#2d4a2d"/>
+      <ellipse cx="165" cy="90" rx="18" ry="30" fill="#4a7a4a"/>
+      <ellipse cx="100" cy="155" rx="55" ry="40" fill="#3a3020"/>
+      <ellipse cx="100" cy="148" rx="48" ry="35" fill="#4a3e28"/>
+      <ellipse cx="100" cy="105" rx="62" ry="58" fill="#8fbc6a"/>
+      <ellipse cx="100" cy="90" rx="55" ry="45" fill="#9ecf75" opacity="0.4"/>
+      <ellipse cx="85" cy="80" rx="30" ry="22" fill="#b5e08a" opacity="0.3"/>
+      <path d="M75 60 Q100 52 125 60" stroke="#6a9a50" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="78" cy="105" rx="13" ry="13" fill="#1a0a05"/>
+      <ellipse cx="122" cy="105" rx="13" ry="13" fill="#1a0a05"/>
+      <circle cx="83" cy="100" r="4" fill="white" opacity="0.9"/>
+      <circle cx="127" cy="100" r="4" fill="white" opacity="0.9"/>
+      <circle cx="85" cy="103" r="1.5" fill="white" opacity="0.6"/>
+      <circle cx="129" cy="103" r="1.5" fill="white" opacity="0.6"/>
+      <ellipse cx="100" cy="120" rx="7" ry="5" fill="#5a8040"/>
+      <ellipse cx="100" cy="119" rx="5" ry="3" fill="#4a7030"/>
+      <path d="M90 132 Q100 140 110 132" stroke="#3d6030" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="65" cy="155" rx="10" ry="7" fill="#8fbc6a" transform="rotate(-20,65,155)"/>
+      <ellipse cx="135" cy="155" rx="10" ry="7" fill="#8fbc6a" transform="rotate(20,135,155)"/>
+      <g transform="translate(100,160)">
+        <path d="M0,-8 C-2,-12 -10,-12 -10,-5 C-10,0 0,8 0,8 C0,8 10,0 10,-5 C10,-12 2,-12 0,-8 Z" fill="#ff4d6d"/>
+        <path d="M0,-8 C-1,-10 -6,-10 -6,-6 C-6,-3 0,3 0,3" fill="rgba(255,255,255,0.25)"/>
+      </g>
+      <path d="M70 148 Q100 160 130 148" stroke="#5a4e30" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <p class="tagline">Grogu has an important<br/>question for <span>YOU</span> 💌</p>
+  <p class="tap-hint">↓ tap Grogu to continue ↓</p>
+</div>
+
+<!-- ══════════ SCREEN 2: The question ══════════ -->
+<div class="screen" id="s2">
+  <div class="card">
+    <div class="q-grogu">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="35" cy="90" rx="28" ry="42" fill="#2d4a2d"/>
+        <ellipse cx="35" cy="90" rx="18" ry="30" fill="#4a7a4a"/>
+        <ellipse cx="165" cy="90" rx="28" ry="42" fill="#2d4a2d"/>
+        <ellipse cx="165" cy="90" rx="18" ry="30" fill="#4a7a4a"/>
+        <ellipse cx="100" cy="155" rx="55" ry="40" fill="#3a3020"/>
+        <ellipse cx="100" cy="148" rx="48" ry="35" fill="#4a3e28"/>
+        <ellipse cx="100" cy="105" rx="62" ry="58" fill="#8fbc6a"/>
+        <ellipse cx="100" cy="90" rx="55" ry="45" fill="#9ecf75" opacity="0.4"/>
+        <ellipse cx="85" cy="80" rx="30" ry="22" fill="#b5e08a" opacity="0.3"/>
+        <path d="M75 60 Q100 52 125 60" stroke="#6a9a50" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="78" cy="105" rx="13" ry="13" fill="#1a0a05"/>
+        <ellipse cx="122" cy="105" rx="13" ry="13" fill="#1a0a05"/>
+        <circle cx="83" cy="100" r="4" fill="white" opacity="0.9"/>
+        <circle cx="127" cy="100" r="4" fill="white" opacity="0.9"/>
+        <ellipse cx="100" cy="120" rx="7" ry="5" fill="#5a8040"/>
+        <path d="M90 132 Q100 140 110 132" stroke="#3d6030" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="65" cy="155" rx="10" ry="7" fill="#8fbc6a" transform="rotate(-20,65,155)"/>
+        <ellipse cx="135" cy="155" rx="10" ry="7" fill="#8fbc6a" transform="rotate(20,135,155)"/>
+        <g transform="translate(100,160)">
+          <path d="M0,-8 C-2,-12 -10,-12 -10,-5 C-10,0 0,8 0,8 C0,8 10,0 10,-5 C10,-12 2,-12 0,-8 Z" fill="#ff4d6d"/>
+          <path d="M0,-8 C-1,-10 -6,-10 -6,-6 C-6,-3 0,3 0,3" fill="rgba(255,255,255,0.25)"/>
+        </g>
+        <path d="M70 148 Q100 160 130 148" stroke="#5a4e30" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="q-text">
+      Will my little<br/>
+      <span class="name-pop" id="rotatingName">Pookie</span><br/>
+      be my Valentine? 💚
+    </div>
+    <p class="q-sub">The Force is asking nicely 🌟</p>
+
+    <div class="btns">
+      <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes!! 💚🩷</button>
+      <p class="no-msg" id="noMsg"></p>
+      <button class="btn-no" id="btnNo" onclick="clickNo()">No...</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN 3: Date reveal ══════════ -->
+<div class="screen" id="s3">
+  <div class="reveal-card">
+
+    <div class="reveal-top">
+      <div class="yes-grogu">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="35" cy="90" rx="28" ry="42" fill="#2d4a2d"/>
+          <ellipse cx="35" cy="90" rx="18" ry="30" fill="#4a7a4a"/>
+          <ellipse cx="165" cy="90" rx="28" ry="42" fill="#2d4a2d"/>
+          <ellipse cx="165" cy="90" rx="18" ry="30" fill="#4a7a4a"/>
+          <ellipse cx="100" cy="155" rx="55" ry="40" fill="#3a3020"/>
+          <ellipse cx="100" cy="148" rx="48" ry="35" fill="#4a3e28"/>
+          <ellipse cx="100" cy="105" rx="62" ry="58" fill="#8fbc6a"/>
+          <ellipse cx="100" cy="90" rx="55" ry="45" fill="#9ecf75" opacity="0.4"/>
+          <ellipse cx="85" cy="80" rx="30" ry="22" fill="#b5e08a" opacity="0.3"/>
+          <!-- Happy squinty eyes -->
+          <path d="M66 105 Q78 95 90 105" stroke="#1a0a05" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M110 105 Q122 95 134 105" stroke="#1a0a05" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <!-- Rosy cheeks -->
+          <ellipse cx="68" cy="118" rx="12" ry="8" fill="#ff8fa3" opacity="0.45"/>
+          <ellipse cx="132" cy="118" rx="12" ry="8" fill="#ff8fa3" opacity="0.45"/>
+          <ellipse cx="100" cy="120" rx="7" ry="5" fill="#5a8040"/>
+          <path d="M82 130 Q100 148 118 130" stroke="#3d6030" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="65" cy="155" rx="10" ry="7" fill="#8fbc6a" transform="rotate(-30,65,155)"/>
+          <ellipse cx="135" cy="155" rx="10" ry="7" fill="#8fbc6a" transform="rotate(30,135,155)"/>
+          <g transform="translate(100,163) scale(1.3)">
+            <path d="M0,-8 C-2,-12 -10,-12 -10,-5 C-10,0 0,8 0,8 C0,8 10,0 10,-5 C10,-12 2,-12 0,-8 Z" fill="#ff4d6d"/>
+            <path d="M0,-8 C-1,-10 -6,-10 -6,-6 C-6,-3 0,3 0,3" fill="rgba(255,255,255,0.25)"/>
+          </g>
+          <path d="M70 148 Q100 160 130 148" stroke="#5a4e30" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="yes-title">Yay, Gumpy!! 🎉<br/>I planned a whole date!</div>
+      <div class="heart-row">💚🩷✨🩷💚</div>
+    </div>
+
+    <div class="date-body">
+      <div class="date-header">📍 your valentine's date</div>
+
+      <div class="venue-name">Scentopia, Sentosa 🌸</div>
+
+      <div class="venue-tag">
+        <span class="dot"></span>
+        World of Fragrance
+        <span class="dot"></span>
+        Sentosa Island
+        <span class="dot"></span>
+      </div>
+
+      <div class="scent-pills">
+        <div class="pill">🧴 Perfume Making</div>
+        <div class="pill">🌿 200+ Scent Oils</div>
+        <div class="pill">🕶️ AR Experiences</div>
+        <div class="pill">🎯 Personality Quiz</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="date-perks">
+        <div class="perk">
+          <div class="perk-icon">🌺</div>
+          <div class="perk-text">
+            Craft your own signature perfume together
+            <small>Take the scent personality quiz & blend your perfect fragrance</small>
+          </div>
         </div>
+        <div class="perk">
+          <div class="perk-icon">✨</div>
+          <div class="perk-text">
+            300+ augmented reality experiences
+            <small>Free scented tours included</small>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">🎁</div>
+          <div class="perk-text">
+            Take home a souvenir
+            <small>Your own signature scent — our scent, bigu 💚</small>
+          </div>
+        </div>
+      </div>
 
-        <!-- Title -->
-        <h1>Astromech-Search</h1>
+      <div class="divider"></div>
 
-        <div id="searchbar">
-            <form id="search-form" action="https://www.google.com/search" method="GET">
-                <!-- Search Bar Wrapper -->
-                <div id="search-bar-container">
-                    <!-- Left Icon -->
-                    <i id="icon-left" class="fas fa-jedi"></i>
-                    
-                    <!-- Input Field -->
-                    <input id="textbox" type="text" name="q" placeholder="Search the Galaxy" required>
-        
-                    <!-- Right Icons -->
-                    <div id="icon-right">
-                        <i class="fas fa-microphone" id="microphone-icon"></i>
-                        <i class="fab fa-google" id="google-icon"></i>
-                    </div>
-                </div>
-        
-                <!-- Hidden Default Submit Button -->
-                <button type="submit" id="submit-button" aria-label="Search"></button>
-                
-                <!-- Lucky Button -->
-                <button type="button" id="lucky-button" name="btnI" value="I'm Feeling Lucky" aria-label="I'm Feeling Lucky" onclick="window.location.href='https://www.google.com/search?q='+document.getElementById('textbox').value+'&btnI=I%27m+Feeling+Lucky'">
-                    Let the Force Guide Me!
-                </button>
-            </form>
-        </div>              
-    </body>
+      <div class="location-pill">
+        📍 Scentopia · Sentosa Island, Singapore
+      </div>
+    </div>
+
+    <div class="close-note">
+      Just you, me, and <span>300 beautiful scents</span> 🌸<br/>
+      This is the way, my little goopy 💚
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ── Stars ──────────────────────────────────────
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 90; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 0.8;
+    s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:${(Math.random()*5).toFixed(1)}s;`;
+    starsEl.appendChild(s);
+  }
+
+  // ── Floating emojis ───────────────────────────
+  const floatySet = ['💚','🩷','✨','💫','🌸','🌟','💕','🌺'];
+  setInterval(() => {
+    const el = document.createElement('div');
+    el.className = 'floaty';
+    el.textContent = floatySet[Math.floor(Math.random()*floatySet.length)];
+    const dur = (Math.random()*6+6).toFixed(1);
+    el.style.cssText = `left:${Math.random()*95}%;bottom:0;--dur:${dur}s;--fs:${(Math.random()*0.9+0.7).toFixed(1)}rem;`;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), parseFloat(dur)*1000+500);
+  }, 1100);
+
+  // ── Nickname cycling ──────────────────────────
+  const nicknames = ['Gumball','Gumpy','Baby','Goopy','Bigu','Pookie','Gimpy', 'Enoki','Amelia 💕'];
+  let nameIdx = 0;
+  const nameCycleEl = document.getElementById('nameCycle');
+
+  const nameInterval = setInterval(() => {
+    nameIdx = (nameIdx + 1) % nicknames.length;
+    nameCycleEl.style.animation = 'none';
+    void nameCycleEl.offsetWidth;
+    nameCycleEl.textContent = nicknames[nameIdx];
+    nameCycleEl.style.animation = 'namePop 0.4s cubic-bezier(0.34,1.56,0.64,1)';
+  }, 1600);
+
+  // ── Screen transitions ────────────────────────
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    el.classList.add('active');
+  }
+
+  function groguTap() {
+    clearInterval(nameInterval);
+    showScreen('s2');
+    // rotate nickname in question too
+    const questionNames = ['Gumball','Gumpy','Baby','Goopy','Bigu','Pookie','Gimpy'];
+    const rn = document.getElementById('rotatingName');
+    let qi = 0;
+    setInterval(() => {
+      qi = (qi + 1) % questionNames.length;
+      rn.style.transition = 'opacity 0.2s';
+      rn.style.opacity = '0';
+      setTimeout(() => {
+        rn.textContent = questionNames[qi];
+        rn.style.opacity = '1';
+      }, 200);
+    }, 2000);
+  }
+
+  // ── No button logic ───────────────────────────
+  let noCount = 0;
+  const noMsgs = [
+    "Gumball... that's not a choice 🥺",
+    "Goopy pls... Grogu is crying 💚",
+    "The Force says YES, bigu 🌟",
+    "Pookie come on... 🙏",
+    "He made you soup. SAY YES 🍵",
+    "Gimpy... I'm begging 😭",
+    "Gumpy I will wiggle my ears at you 👂",
+    "This is the way... and the way is YES 💫",
+    "Baby I planned a whole date 🌸",
+    "Buppy. PLEASE. 💚💚💚",
+  ];
+
+  function clickNo() {
+    noCount++;
+    const yesBtn = document.getElementById('btnYes');
+    const noMsg = document.getElementById('noMsg');
+    const noBtn = document.getElementById('btnNo');
+
+    const currentSize = parseFloat(getComputedStyle(yesBtn).fontSize);
+    const newSize = Math.min(currentSize * 1.2, 50);
+    yesBtn.style.fontSize = newSize + 'px';
+    yesBtn.style.padding = `${0.8 + noCount*0.06}em ${2 + noCount*0.09}em`;
+
+    noMsg.textContent = noMsgs[Math.min(noCount - 1, noMsgs.length - 1)];
+    noMsg.classList.add('vis');
+
+    noBtn.style.opacity = Math.max(1 - noCount * 0.09, 0.1);
+    noBtn.style.transform = `scale(${Math.max(1 - noCount*0.06, 0.35)})`;
+
+    // shake
+    noBtn.animate([
+      {transform:'translateX(-6px)'}, {transform:'translateX(6px)'},
+      {transform:'translateX(-4px)'}, {transform:'translateX(0)'}
+    ], { duration: 300 });
+  }
+
+  // ── Yes logic ─────────────────────────────────
+  function sayYes() {
+    launchConfetti();
+    setTimeout(() => showScreen('s3'), 350);
+  }
+
+  function launchConfetti() {
+    const colors = ['#4ade80','#fda4af','#fcd34d','#c4b5fd','#60a5fa','#ff4d6d','#34d399'];
+    for (let i = 0; i < 100; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      const color = colors[Math.floor(Math.random()*colors.length)];
+      const w = Math.random()*10+5, h = Math.random()*10+5;
+      const delay = (Math.random()*1.8).toFixed(2);
+      const dur = (Math.random()*2+2.5).toFixed(2);
+      const shapes = ['border-radius:50%','border-radius:2px','clip-path:polygon(50% 0%,0% 100%,100% 100%)'];
+      el.style.cssText = `
+        left:${Math.random()*100}%;top:0;
+        width:${w}px;height:${h}px;
+        background:${color};
+        ${shapes[Math.floor(Math.random()*shapes.length)]};
+        --cd:${dur}s;--cd-delay:${delay}s;
+      `;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), (parseFloat(dur)+parseFloat(delay))*1000+300);
+    }
+  }
+</script>
+</body>
 </html>
